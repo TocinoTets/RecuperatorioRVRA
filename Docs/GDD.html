@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>GDD – Sistema Solar AR</title>
+<style>
+  @page { size: A4; margin: 18mm 18mm; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #1d1d1f; }
+  h1 { font-size: 22pt; margin: 0; }
+  h2 { font-size: 13pt; border-bottom: 2px solid #f08a1c; padding-bottom: 2px; margin: 16px 0 6px; }
+  .sub { color: #555; margin: 2px 0 12px; }
+  .hc { background: #fff4e6; border-left: 4px solid #f08a1c; padding: 8px 12px; font-size: 11.5pt; }
+  table { border-collapse: collapse; width: 100%; font-size: 9.5pt; }
+  th, td { border: 1px solid #ccc; padding: 4px 6px; text-align: left; vertical-align: top; }
+  th { background: #f3f3f3; }
+  .cartas { display: flex; gap: 10px; margin: 8px 0; }
+  .cartas figure { margin: 0; flex: 1; text-align: center; font-size: 9pt; }
+  .cartas img { width: 100%; border: 1px solid #999; }
+  ul { margin: 4px 0; padding-left: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Sistema Solar AR</h1>
+<p class="sub">Game Design Document inicial · Parcial de Realidad Aumentada (Unity + AR Foundation) · Alumno/a: Ignacio Rodríguez</p>
+
+<h2>1. High Concept</h2>
+<p class="hc"><b>Un mazo de cartas impresas que, al apuntarles con el celular, hacen aparecer los cuerpos del sistema solar en 3D sobre la mesa,</b> cada uno girando sobre su eje y con un dato clave flotando encima. Se pueden escanear varias cartas a la vez para comparar tamaños y armar el sistema solar sobre el pupitre.</p>
+<table>
+  <tr><th>Género</th><td>Recurso educativo aumentado (AR marker-based)</td></tr>
+  <tr><th>Plataforma</th><td>Android con soporte ARCore (APK)</td></tr>
+  <tr><th>Tecnología</th><td>Unity 6.3 · URP · AR Foundation 6.7 · ARCore XR Plugin · Image Tracking múltiple</td></tr>
+  <tr><th>Duración de sesión</th><td>3 a 10 minutos (actividad de aula)</td></tr>
+</table>
+
+<h2>2. Problema / necesidad</h2>
+<p>En la escuela primaria y secundaria el sistema solar se enseña con láminas y dibujos planos. Eso deja dos problemas:</p>
+<ul>
+  <li><b>Escala y volumen:</b> en una lámina la Tierra y Saturno se ven parecidos; cuesta entender las diferencias de tamaño y que los planetas son esferas que rotan.</li>
+  <li><b>Poca participación:</b> el material es pasivo. Las maquetas físicas son caras, se rompen y no se pueden llevar a casa.</li>
+</ul>
+<p>La propuesta usa algo que el estudiante ya tiene (un celular) y algo barato (cartas impresas) para tener un modelo 3D manipulable: el alumno mueve la carta con la mano y el planeta la sigue, lo acerca, lo rota y lo compara con otro planeta al lado.</p>
+
+<h2>3. Usuario objetivo</h2>
+<table>
+  <tr><th>Primario</th><td>Estudiantes de 9 a 14 años (2.º ciclo de primaria / 1.º de secundaria) que estudian el sistema solar en Ciencias Naturales.</td></tr>
+  <tr><th>Secundario</th><td>Docentes que necesitan un recurso visual, rápido de preparar (imprimir 4 cartas) y sin conexión a Internet.</td></tr>
+  <tr><th>Contexto de uso</th><td>Aula o casa, sobre una mesa con buena luz, en grupos pequeños compartiendo un celular Android de gama media.</td></tr>
+  <tr><th>Necesidades</th><td>Interacción inmediata (apuntar y ver), texto corto y legible, sin menús ni registro.</td></tr>
+</table>
+
+<h2>4. Mecánica principal</h2>
+<ul>
+  <li><b>Escanear:</b> al detectar una carta, aparece su cuerpo celeste 3D anclado a la carta, girando, con un cartel (nombre + dato) que siempre mira a la cámara.</li>
+  <li><b>Comparar:</b> el seguimiento es <b>múltiple</b> (hasta 4 imágenes a la vez, en movimiento). Poner dos cartas juntas permite comparar tamaños relativos (Sol &gt; Saturno &gt; Tierra &gt; Marte).</li>
+  <li><b>Estabilidad:</b> si una carta deja de verse (estado <i>Limited</i>), su planeta se oculta en lugar de quedar flotando en una posición incorrecta, y reaparece al volver a enfocarla.</li>
+  <li><b>Legibilidad:</b> el cartel de datos tiene texto blanco con contorno negro, así se lee sobre cualquier fondo (mesa clara o ambiente oscuro).</li>
+</ul>
+
+<h2>5. Imágenes marcadoras y justificación</h2>
+<div class="cartas">
+  <figure><img src="../Assets/AR/Marcadores/Sol.png"><figcaption>Sol</figcaption></figure>
+  <figure><img src="../Assets/AR/Marcadores/Tierra.png"><figcaption>Tierra</figcaption></figure>
+  <figure><img src="../Assets/AR/Marcadores/Marte.png"><figcaption>Marte</figcaption></figure>
+  <figure><img src="../Assets/AR/Marcadores/Saturno.png"><figcaption>Saturno</figcaption></figure>
+</div>
+<p>Se diseñaron cartas propias (8 × 11 cm, tamaño naipe grande) en lugar de usar fotos de la NASA, porque las fotos de planetas tienen fondos negros uniformes y degradados suaves: pocos <i>feature points</i> y mal rastreo. Criterios aplicados:</p>
+<ul>
+  <li><b>Alto contraste y bordes duros:</b> formas negras y de color sobre fondo blanco generan muchas esquinas detectables por ARCore.</li>
+  <li><b>Sin patrones repetidos:</b> cada carta se generó con una distribución aleatoria distinta (semilla propia), así ARCore no confunde una carta con otra.</li>
+  <li><b>Color e ícono temático:</b> cada carta tiene el color del planeta, un planeta central y su nombre grande. El alumno sabe qué va a aparecer antes de escanear, y la carta sirve como material aunque no haya celular.</li>
+  <li><b>Tamaño físico declarado</b> en la <i>Reference Image Library</i> (0,08 × 0,11 m): ARCore estima la escala desde el primer frame, lo que da una detección más rápida y estable.</li>
+  <li><b>Formato imprimible</b> en una hoja A4 y en papel mate, para evitar reflejos que rompen el rastreo.</li>
+</ul>
+
+</body>
+</html>

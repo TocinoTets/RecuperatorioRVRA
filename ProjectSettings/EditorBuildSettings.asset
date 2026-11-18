@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/SistemaSolarAR.unity
+    guid: 70d97b8f02db647438b5a51e2138cdae
   m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 212a276d3eb14eb4aa12f4be44e15970, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: c7241f77c43a1724ea1342b1e38e58c2, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 3925f521231aca743874428ad865bdfe, type: 2}
   m_UseUCBPForAssetBundles: 0

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guion del video – Sistema Solar AR</title>
+<style>
+  @page { size: A4; margin: 16mm; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #1d1d1f; }
+  h1 { font-size: 20pt; margin: 0 0 4px; }
+  h2 { font-size: 12.5pt; border-bottom: 2px solid #f08a1c; padding-bottom: 2px; margin: 14px 0 6px; }
+  .nota { background: #f3f3f3; padding: 6px 10px; font-size: 9.5pt; }
+  .decir { background: #fff4e6; border-left: 4px solid #f08a1c; padding: 6px 10px; font-style: italic; }
+  table { border-collapse: collapse; width: 100%; font-size: 9.5pt; }
+  th, td { border: 1px solid #ccc; padding: 4px 6px; text-align: left; vertical-align: top; }
+  th { background: #f3f3f3; }
+  ol, ul { margin: 4px 0; padding-left: 20px; }
+  kbd { border: 1px solid #aaa; border-radius: 3px; padding: 0 4px; font-size: 9pt; }
+</style>
+</head>
+<body>
+<h1>Guion del video – Sistema Solar AR</h1>
+<p>Duración aproximada: <b>3 min 15 s</b></p>
+<p class="nota">Grabá la pantalla de la PC con OBS (o con la grabadora de la Xbox Game Bar: <kbd>Win</kbd> + <kbd>Alt</kbd> + <kbd>R</kbd>) y tu voz con el micrófono. Para la parte de AR, usá XR Simulation en Unity (Play) o grabá la pantalla del celular con el APK. Exportá en MP4 y subilo a YouTube como <b>oculto</b> o a Drive con <b>acceso público</b>.</p>
+
+<h2>1. Presentación y High Concept · 0:00 – 0:35</h2>
+<p><b>Pantalla:</b> página 1 del GDD (PDF) o las 4 cartas impresas sobre la mesa.</p>
+<p class="decir">"Hola, soy Ignacio Rodríguez. Mi proyecto se llama Sistema Solar AR. Es un recurso educativo de realidad aumentada: un mazo de cartas impresas que, al apuntarles con el celular, hacen aparecer los planetas en 3D sobre la mesa, girando y con un dato clave encima. Resuelve un problema concreto: en la escuela el sistema solar se enseña con láminas planas, donde cuesta entender el volumen y las diferencias de tamaño. Está pensado para chicos de 9 a 14 años y para docentes que necesitan un recurso barato: solo hay que imprimir cuatro cartas."</p>
+
+<h2>2. Las imágenes marcadoras · 0:35 – 0:55</h2>
+<p><b>Pantalla:</b> carpeta <code>Assets/AR/Marcadores</code> en Unity, o la sección 5 del GDD.</p>
+<p class="decir">"Diseñé mis propias cartas: Sol, Tierra, Marte y Saturno. No usé fotos reales porque tienen fondos negros y degradados que ARCore rastrea mal. Estas tienen alto contraste, bordes duros y un patrón distinto en cada carta, así se detectan rápido y no se confunden entre sí."</p>
+
+<h2>3. El proyecto de Unity · 0:55 – 2:00</h2>
+<p>Mostrá cada cosa haciendo clic en la Hierarchy / Project y señalando el Inspector.</p>
+<table>
+  <tr><th>Tiempo</th><th>Mostrar</th><th>Decir</th></tr>
+  <tr><td>0:55</td><td><b>Package Manager</b> → AR Foundation y Google ARCore XR Plugin</td><td>"Uso Unity 6.3 con URP, AR Foundation 6.7 y el plugin de ARCore para Android."</td></tr>
+  <tr><td>1:05</td><td><b>Project Settings → XR Plug-in Management</b>: pestaña Android (ARCore) y pestaña PC (XR Simulation)</td><td>"En Android está activado ARCore, y en PC XR Simulation para probar sin el celular."</td></tr>
+  <tr><td>1:15</td><td>Hierarchy: <b>AR Session</b> y <b>XR Origin</b></td><td>"La escena tiene el AR Session, que maneja el ciclo de vida de AR, y el XR Origin con la cámara."</td></tr>
+  <tr><td>1:25</td><td><b>MarcadoresLibrary</b> en el Inspector</td><td>"Esta es la Reference Image Library con las cuatro cartas. A cada una le declaré el tamaño físico, 8 por 11 centímetros, para que la detección sea más estable."</td></tr>
+  <tr><td>1:35</td><td><b>XR Origin → AR Tracked Image Manager</b></td><td>"El AR Tracked Image Manager usa esa librería y permite seguir hasta 4 imágenes en movimiento a la vez: este es el seguimiento de imágenes múltiples."</td></tr>
+  <tr><td>1:45</td><td><b>Sistema Solar Tracker</b> en el Inspector (lista Planetas desplegada)</td><td>"Mi script, Sistema Solar Tracker, tiene la configuración de cada planeta: material, diámetro, si tiene anillos y el dato que muestra."</td></tr>
+  <tr><td>1:50</td><td>Abrí <b>SistemaSolarTracker.cs</b></td><td>"Cuando el manager detecta una imagen nueva, busco su nombre en la lista y creo el planeta encima de la carta. Si la carta deja de rastrearse bien, oculto el planeta para que no quede flotando en un lugar equivocado. Además, el planeta se escala según el tamaño real de la carta detectada, y el cartel siempre mira a la cámara."</td></tr>
+</table>
+
+<h2>4. Demo funcionando · 2:00 – 3:00</h2>
+<p><b>Pantalla:</b> Play con XR Simulation (o el celular). Moverse: <kbd>clic derecho</kbd> + <kbd>WASD</kbd>, mouse para mirar, <kbd>Q</kbd>/<kbd>E</kbd> bajar/subir.</p>
+<ol>
+  <li><b>2:00</b> Acercate a una sola carta (Tierra) y esperá que aparezca. <i>"Al detectar la carta de la Tierra aparece el planeta girando, con su dato."</i></li>
+  <li><b>2:15</b> Recorré las otras tres de a una (Sol, Marte, Saturno con sus anillos). <i>"Cada carta activa su propio planeta."</i></li>
+  <li><b>2:35</b> Alejate para ver <b>varias cartas a la vez</b>. <i>"Acá se ve el seguimiento múltiple: varias imágenes rastreadas al mismo tiempo, y se pueden comparar los tamaños: el Sol es el más grande y Marte el más chico."</i></li>
+  <li><b>2:50</b> Movete y volvé a una carta (o tapala con la mano en el celular). <i>"El seguimiento es estable: si la pierdo de vista, el planeta se oculta, y al volver a enfocarla reaparece en su lugar."</i></li>
+</ol>
+
+<h2>5. Cierre · 3:00 – 3:15</h2>
+<p><b>Pantalla:</b> las 4 cartas con sus planetas o la página del GDD.</p>
+<p class="decir">"Como mejoras a futuro, agregaría el resto de los planetas, preguntas tipo trivia al juntar dos cartas y órbitas animadas. Gracias por mirar."</p>
+
+<h2>Checklist antes de grabar</h2>
+<ul>
+  <li>☐ Unity sin errores en la Console.</li>
+  <li>☐ Probaste el Play una vez entero y todas las cartas se detectan.</li>
+  <li>☐ Ventana de Unity maximizada y la fuente legible.</li>
+  <li>☐ Duración final entre 2 y 4 minutos.</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
+  m_Name: MarcadoresLibrary
+  m_EditorClassIdentifier: Unity.XR.ARSubsystems::UnityEngine.XR.ARSubsystems.XRReferenceImageLibrary
+  m_GuidLow: 5697206786510777726
+  m_GuidHigh: 4488160291377505442
+  m_DataStore:
+    m_Storage: []
+  m_Images:
+  - m_SerializedGuid:
+      m_GuidLow: 4903677787455390941
+      m_GuidHigh: 10367888324389083577
+    m_SerializedTextureGuid:
+      m_GuidLow: 7702340772782215311
+      m_GuidHigh: 15919435663733037593
+    m_Size: {x: 0.08, y: 0.11}
+    m_SpecifySize: 1
+    m_Name: Sol
+    m_Texture: {fileID: 2800000, guid: c4b1108f361f6ae4191a7e316432eddc, type: 3}
+    m_MovingImageType: 0
+  - m_SerializedGuid:
+      m_GuidLow: 5472564267294531274
+      m_GuidHigh: 4906895749251360910
+    m_SerializedTextureGuid:
+      m_GuidLow: 3027662265133462027
+      m_GuidHigh: 7289134708151100635
+    m_Size: {x: 0.08, y: 0.11}
+    m_SpecifySize: 1
+    m_Name: Tierra
+    m_Texture: {fileID: 2800000, guid: f522720b6ac92a04db2451c765352865, type: 3}
+    m_MovingImageType: 0
+  - m_SerializedGuid:
+      m_GuidLow: 4820495349634604774
+      m_GuidHigh: 13232452294480745869
+    m_SerializedTextureGuid:
+      m_GuidLow: 5000298552076818695
+      m_GuidHigh: 5266886124256801514
+    m_Size: {x: 0.08, y: 0.11}
+    m_SpecifySize: 1
+    m_Name: Marte
+    m_Texture: {fileID: 2800000, guid: 57705907a10a4564eab2c25c06bd1749, type: 3}
+    m_MovingImageType: 0
+  - m_SerializedGuid:
+      m_GuidLow: 5106228511034329759
+      m_GuidHigh: 10204509776813110678
+    m_SerializedTextureGuid:
+      m_GuidLow: 5058789135346619769
+      m_GuidHigh: 6366280379188467673
+    m_Size: {x: 0.08, y: 0.11}
+    m_SpecifySize: 1
+    m_Name: Saturno
+    m_Texture: {fileID: 2800000, guid: 7df0d5796dea4634d957115e46925958, type: 3}
+    m_MovingImageType: 0
+  m_MovingImageType: 0
